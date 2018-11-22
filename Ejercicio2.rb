@@ -34,7 +34,7 @@ courses = create_array_of_objects(open_file(file_name))
 
 def courses_before(courses, selected_date = '2017-10-31')
   date = Date.parse(selected_date)
-  raise ArgumentError, "Argument's date is further than permitted" unless date < Date.parse("2018-01-01")
+  raise ArgumentError, "Argument's date is further than permitted" unless date >= Date.parse("2018-01-01")
   courses_ongoing = courses.select { |course| course.first_date < date }
   puts "Courses that start before #{date}:"
   courses_ongoing.each do |course|
@@ -44,7 +44,7 @@ end
 
 def courses_after(courses, selected_date = Date.today)
   date = selected_date
-  raise ArgumentError, "Argument's date is before than permitted" unless date > Date.parse("2018-01-01")
+  raise ArgumentError, "Argument's date is further than permitted" unless date >= Date.parse("2018-01-01")
   courses_ended = courses.select { |course| course.last_date > date }
   puts "Courses that end after #{date}"
   courses_ended.each do |course|
